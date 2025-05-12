@@ -7,12 +7,14 @@ import {
   YAxis,
   CartesianGrid,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
 import {
   MetricsStackedBarChartContainer,
   MetricsStackedBarChartTitle,
 } from "./styles";
 import { useTransaction } from "@/hooks/useTransaction";
+import { MetricsTooltipChart } from "../metrics-tooltip-chart";
 
 export function MetricsStackedBarChart() {
   const { monthlyData } = useTransaction();
@@ -31,6 +33,7 @@ export function MetricsStackedBarChart() {
             margin={{ top: 16, right: 30, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+            <Tooltip content={<MetricsTooltipChart type="bar" />} />
             <XAxis dataKey="month" tick={{ dy: 20 }} height={50} />
             <YAxis
               width={120}

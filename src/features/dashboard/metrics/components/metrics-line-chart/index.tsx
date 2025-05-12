@@ -9,9 +9,11 @@ import {
   YAxis,
   ResponsiveContainer,
   CartesianGrid,
+  Tooltip,
 } from "recharts";
 import { MetricsLineChartContainer, MetricsLineChartTitle } from "./styles";
 import { useTransaction } from "@/hooks/useTransaction";
+import { MetricsTooltipChart } from "../metrics-tooltip-chart";
 
 
 export function MetricsLineChart() {
@@ -31,6 +33,7 @@ export function MetricsLineChart() {
             margin={{ top: 16, right: 30, left: 0, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
+            <Tooltip content={<MetricsTooltipChart type="line" />} />
             <XAxis dataKey="month" tick={{ dy: 20 }} height={50} />
             <YAxis
               width={100}
