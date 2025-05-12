@@ -12,6 +12,8 @@ export const NavLinkContainer = styled(Link)<NavLinkContainerProps>`
   border-radius: 0.25ren;
   justify-content: space-between;
 
+  white-space: nowrap;
+
   transition: all 0.2s;
   padding: 0.5rem 0.75rem;
   color: ${({ $isActive }) =>
@@ -44,59 +46,4 @@ export const NavLinkShortly = styled.span`
   font-size: 0.75rem;
 
   background-color: rgb(217 119 6);
-`;
-
-export const SidebarAccountMenuContainer = styled.div`
-  gap: 0.75rem;
-  display: grid;
-  align-items: center;
-  grid-template-columns: max-content 1fr max-content;
-
-  > img {
-    border-radius: 9999px;
-    border: 2px solid hsl(var(--primary));
-  }
-
-  > button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-
-    width: 2.5rem;
-    height: 2.5rem;
-
-    border-radius: 0.75rem;
-    color: hsl(var(--card-secondary));
-    background-color: hsl(var(--card));
-    border: 1px solid hsl(var(--input));
-
-    > svg {
-      width: 1rem;
-      height: 1rem;
-    }
-  }
-`;
-
-export const SidebarAccountMenuContent = styled.div`
-  display: flex;
-  overflow: hidden;
-  white-space: nowrap;
-  flex-direction: column;
-  text-overflow: ellipsis;
-
-  > h2 {
-    font-weight: 600;
-    font-size: 0.875rem;
-  }
-
-  > span {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    font-size: 0.875rem;
-    color: rgb(244 244 255);
-  }
 `;

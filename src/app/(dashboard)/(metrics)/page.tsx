@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { PageTitle } from "@/components/page-title";
 import { MetricsFinancialSummaryCard } from "@/features/dashboard/metrics/components/metrics-financial-summary-card";
@@ -9,10 +9,11 @@ import {
   MetricsPageSummaryCardContainer,
 } from "@/features/dashboard/metrics/styles";
 import { useTransaction } from "@/hooks/useTransaction";
-import Skeleton from "@/components/skeleton";
+
+import { motion } from "framer-motion";
 
 export default function Home() {
-  const { summary, isLoadingTransactionsInfo } = useTransaction()
+  const { summary } = useTransaction();
 
   return (
     <div>
@@ -22,54 +23,81 @@ export default function Home() {
         description="Exibe em tempo real as métricas da sua empresa da parte financeira e de gestão."
       />
 
-      {isLoadingTransactionsInfo ? (
-        <>
-          <MetricsPageSummaryCardContainer>
-            <Skeleton width="100%" height="100px" />
-            <Skeleton width="100%" height="100px" />
-            <Skeleton width="100%" height="100px" />
-            <Skeleton width="100%" height="100px" col="3" />
-          </MetricsPageSummaryCardContainer>
-
-          <MetricsPageChartsContainer>
-            <Skeleton width="100%" height="400px" col="3" />
-            <Skeleton width="100%" height="400px" col="3" />
-          </MetricsPageChartsContainer>
-        </>
-      ) : (
-        <>
-          <MetricsPageSummaryCardContainer>
+      <>
+        <MetricsPageSummaryCardContainer>
+          <motion.div
+            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: 50, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <MetricsFinancialSummaryCard
               value={summary.income}
               title="Receitas totais"
               iconName="TrendingUpIcon"
             />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: 50, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
             <MetricsFinancialSummaryCard
               variant="negative"
               title="Despesas totais"
               value={summary.expenses}
               iconName="TrendingDownIcon"
             />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: 50, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
             <MetricsFinancialSummaryCard
               variant="pending"
               value={summary.pending}
               iconName="RefreshCcwIcon"
               title="Transações pendentes"
             />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: 50, opacity: 0 }}
+            style={{ gridColumn: "span 3 / span 3" }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
             <MetricsFinancialSummaryCard
               col={3}
               title="Saldo total"
               iconName="DollarSign"
               value={summary.balance}
             />
-          </MetricsPageSummaryCardContainer>
+          </motion.div>
+        </MetricsPageSummaryCardContainer>
 
-          <MetricsPageChartsContainer>
+        <MetricsPageChartsContainer>
+          <motion.div
+            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: 50, opacity: 0 }}
+            style={{ gridColumn: "span 3 / span 3" }}
+            transition={{ duration: 0.5, delay: 1 }}
+          >
             <MetricsLineChart />
+          </motion.div>
+
+          <motion.div
+            animate={{ y: 0, opacity: 1 }}
+            initial={{ y: 50, opacity: 0 }}
+            style={{ gridColumn: "span 3 / span 3" }}
+            transition={{ duration: 0.5, delay: 1.3 }}
+          >
             <MetricsStackedBarChart />
-          </MetricsPageChartsContainer>
-        </>
-      )}
+          </motion.div>
+        </MetricsPageChartsContainer>
+      </>
     </div>
   );
 }

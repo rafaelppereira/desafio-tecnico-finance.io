@@ -12,6 +12,7 @@ export const UsedPlanWidgetContainer = styled.div`
 export const UsedPlanWidgetTitleContainer = styled.div`
   gap: 0.25rem;
   display: flex;
+  overflow-x: auto;
   font-size: 0.875rem;
   flex-direction: column;
 

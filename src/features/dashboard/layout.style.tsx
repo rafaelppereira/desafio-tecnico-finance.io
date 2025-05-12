@@ -16,7 +16,7 @@ export const DashboardLayoutContainer = styled.main`
 
 export const DashboardLayoutContent = styled.div`
   max-width: 100vw;
-  padding: 1rem;
+  padding: 5.5rem 1rem 1rem 1rem;
   
   @media(min-width: 1024px) {
     padding: 1.3rem;
