@@ -12,7 +12,6 @@ export const FinancialSummaryCardContainer = styled.div<FinancialSummaryCardCont
   border-radius: 0.75rem;
 
   backdrop-filter: blur(30px);
-  border: 2px solid hsl(var(--secondary));
   background-color: hsl(var(--background));
 
   grid-column: span ${({ $col }) => $col} / span ${({ $col }) => $col};

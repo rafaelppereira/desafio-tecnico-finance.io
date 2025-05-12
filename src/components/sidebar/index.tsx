@@ -22,6 +22,7 @@ import {
   SidebarAccountMenuContent,
 } from "../nav-item/styles";
 import { useRouter } from "next/navigation";
+import { UsedPlanWidget } from "../used-plan-widget";
 
 export function Sidebar() {
   const router = useRouter()
@@ -89,6 +90,8 @@ export function Sidebar() {
               icon={CircleUserIcon}
             />
           </nav>
+
+          <UsedPlanWidget />
 
           <SidebarContentSeparator />
 
