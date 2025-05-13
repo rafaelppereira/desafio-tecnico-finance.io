@@ -1,4 +1,5 @@
  
+ 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Select } from "@/components/select";
 import {
@@ -19,9 +20,9 @@ import { useEffect } from "react";
 
 export function MetricsFilters() {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const pathname = usePathname();
   const {
     stateTypes,
     accountTypes,
@@ -29,6 +30,7 @@ export function MetricsFilters() {
     setTransactions,
     transactionsBackup,
     getAllTransactionsInfo,
+    getTransactionsFiltered,
   } = useTransaction();
 
   const form = useForm<MetricsFiltersSchemaProps>({
@@ -38,26 +40,34 @@ export function MetricsFilters() {
   const onSubmit = async (data: MetricsFiltersSchemaProps) => {
     const params = new URLSearchParams();
 
+    if (data.startDate) params.set("startDate", data.startDate);
+    if (data.endDate) params.set("endDate", data.endDate);
     if (data.account) params.set("account", data.account);
     if (data.industry) params.set("industry", data.industry);
     if (data.state) params.set("state", data.state);
 
     router.push(`${pathname}?${params.toString()}`);
 
-    const filter = transactionsBackup.filter(
-      (t: any) =>
-        t.account === data.account ||
-        t.industry === data.industry ||
-        t.state === data.state
-    );
+    const start = data.startDate ? new Date(data.startDate).getTime() : null;
+    const end = data.endDate ? new Date(data.endDate).getTime() : null;
+  
+    const filter = transactionsBackup.filter((t: any) => {
+      const matchAccount = !data.account || t.account === data.account;
+      const matchIndustry = !data.industry || t.industry === data.industry;
+      const matchState = !data.state || t.state === data.state;
+      const matchDate = (!start || t.date >= start) && (!end || t.date <= end);
+  
+      return matchAccount && matchIndustry && matchState && matchDate;
+    });
+
     setTransactions(filter);
-    getAllTransactionsInfo(false)
+    getTransactionsFiltered(filter)
   };
 
   const handleResetFilters = async () => {
     form.reset();
     router.push(pathname);
-    await getAllTransactionsInfo()
+    await getAllTransactionsInfo();
   };
 
   useEffect(() => {
@@ -75,7 +85,7 @@ export function MetricsFilters() {
     form.setValue("industry", industry ?? "");
     form.setValue("startDate", startDate ?? "");
   }, [industryTypes, accountTypes, stateTypes, searchParams, form]);
-
+  
   return (
     <FormProvider {...form}>
       <MetricsFiltersContainer onSubmit={form.handleSubmit(onSubmit)}>
@@ -84,8 +94,8 @@ export function MetricsFilters() {
         </MetricsFilterTitleContainer>
 
         <MetricsFiltersContentDateRange>
-          <Input placeholder="Data inicial" {...form.register("startDate")} />
-          <Input placeholder="Data final" {...form.register("endDate")} />
+          <Input type="date" placeholder="Data inicial" {...form.register("startDate")} />
+          <Input type="date" placeholder="Data final" {...form.register("endDate")} />
         </MetricsFiltersContentDateRange>
 
         <MetricsFiltersContent>

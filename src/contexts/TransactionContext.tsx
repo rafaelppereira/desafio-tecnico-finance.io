@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+ 
 "use client";
 
 import { TransactionsProps } from "@/features/dashboard/metrics/types";
@@ -26,54 +26,51 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
     expenses: 0,
   });
 
-  const getAllTransactionsInfo = async (
-    isFilteredTransactions: boolean = true
-  ) => {
-    if (isFilteredTransactions) {
-      const response = await fetch("/api/transactions");
-      const transactions: TransactionsProps[] = await response.json();
+  const getTransactionsFiltered = (transactionsFiltered: TransactionsProps[]) => {
+    const income = transactionsFiltered
+      .filter((t) => t.transaction_type === "deposit")
+      .reduce((acc, t) => acc + parseInt(t.amount), 0);
 
-      const income = transactions
-        .filter((t) => t.transaction_type === "deposit")
-        .reduce((acc, t) => acc + parseInt(t.amount), 0);
+    const expenses = transactionsFiltered
+      .filter((t) => t.transaction_type === "withdraw")
+      .reduce((acc, t) => acc + parseInt(t.amount), 0);
 
-      const expenses = transactions
-        .filter((t) => t.transaction_type === "withdraw")
-        .reduce((acc, t) => acc + parseInt(t.amount), 0);
+    const pending = 0;
 
-      const pending = 0;
+    const balance = income - expenses;
 
-      const balance = income - expenses;
+    setSummary({
+      income: income / 100,
+      pending: pending / 100,
+      balance: balance / 100,
+      expenses: expenses / 100,
+    });
+  };
 
-      setSummary({
-        income: income / 100,
-        pending: pending / 100,
-        balance: balance / 100,
-        expenses: expenses / 100,
-      });
+  const getAllTransactionsInfo = async () => {
+    const response = await fetch("/api/transactions");
+    const transactionsResponse: TransactionsProps[] = await response.json();
+    const income = transactionsResponse
+      .filter((t) => t.transaction_type === "deposit")
+      .reduce((acc, t) => acc + parseInt(t.amount), 0);
 
-      setTransactions(transactions);
-      setTransactionsBackup(transactions);
-    } else {
-      const income = transactions
-        .filter((t) => t.transaction_type === "deposit")
-        .reduce((acc, t) => acc + parseInt(t.amount), 0);
+    const expenses = transactionsResponse
+      .filter((t) => t.transaction_type === "withdraw")
+      .reduce((acc, t) => acc + parseInt(t.amount), 0);
 
-      const expenses = transactions
-        .filter((t) => t.transaction_type === "withdraw")
-        .reduce((acc, t) => acc + parseInt(t.amount), 0);
+    const pending = 0;
 
-      const pending = 0;
+    const balance = income - expenses;
 
-      const balance = income - expenses;
+    setSummary({
+      income: income / 100,
+      pending: pending / 100,
+      balance: balance / 100,
+      expenses: expenses / 100,
+    });
 
-      setSummary({
-        income: income / 100,
-        pending: pending / 100,
-        balance: balance / 100,
-        expenses: expenses / 100,
-      });
-    }
+    setTransactions(transactionsResponse);
+    setTransactionsBackup(transactionsResponse);
   };
 
   const accountTypes = Array.from(
@@ -90,12 +87,12 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
     value: industry,
   }));
 
-  const stateTypes = Array.from(new Set(transactionsBackup.map((t) => t.state))).map(
-    (state) => ({
-      label: state,
-      value: state,
-    })
-  );
+  const stateTypes = Array.from(
+    new Set(transactionsBackup.map((t) => t.state))
+  ).map((state) => ({
+    label: state,
+    value: state,
+  }));
 
   useEffect(() => {
     getAllTransactionsInfo();
@@ -124,6 +121,7 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
         setTransactions,
         transactionsBackup,
         getAllTransactionsInfo,
+        getTransactionsFiltered,
         isLoadingTransactionsInfo,
       }}
     >

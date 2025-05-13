@@ -56,10 +56,25 @@ export const InputContainer = styled.div`
     &:focus {
       border-color: hsl(var(--primary));
     }
+
+    &[type="date"]::-webkit-calendar-picker-indicator {
+      background: transparent;
+      filter: invert(1); /* deixa branco no modo escuro */
+      cursor: pointer;
+    }
+
+    &[type="date"]::-webkit-inner-spin-button,
+    &[type="date"]::-webkit-clear-button {
+      display: none;
+    }
+
+    &[type="date"]::-moz-focus-inner {
+      border: 0;
+    }
   }
-`
+`;
 
 export const InputLabel = styled.label`
   font-size: 0.875rem;
   font-weight: 500;
-`
+`;

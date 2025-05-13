@@ -15,7 +15,7 @@ export function Select({
   return (
     <SelectContainer>   
       <select {...props}>
-        <option value="">{placeholder}</option>
+        <option value="" disabled>{placeholder}</option>
         {options.map((item, i) => (
           <option key={i} value={item.value}>
             {item.label}

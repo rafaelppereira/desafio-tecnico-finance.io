@@ -1,3 +1,6 @@
+ 
+"use client";
+
 import { ComponentProps, useState } from "react";
 import { InputContainer, InputLabel } from "./styles";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
@@ -25,11 +28,12 @@ export function Input({ label, className, ...props }: InputProps) {
       {label && <InputLabel>{label}</InputLabel>}
 
       <div>
-        <input
-          {...props}
-          className={className}
-          type={props.type !== "password" ? props.type : inputType}
-        />
+      
+          <input
+            {...props}
+            className={className}
+            type={props.type !== "password" ? props.type : inputType}
+          />
 
         {props.type === "password" && (
           <button type="button" onClick={handleToggleInputType}>

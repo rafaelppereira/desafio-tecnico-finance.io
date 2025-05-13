@@ -8,6 +8,17 @@ export const MetricsLineChartContainer = styled.div`
   background-color: hsl(var(--background));
 
   grid-column: span 1 / span 1;
+
+  span {
+    font-weight: 700;
+    border-radius: 9999px;
+    padding: 0.25rem 0.5rem;
+
+    color: white;
+    font-size: 0.75rem;
+
+    background-color: rgb(217 119 6);
+  }
 `;
 
 export const MetricsLineChartTitle = styled.div`
