@@ -67,11 +67,8 @@ O projeto estará disponível em http://localhost:3000
 - [x] Proteger a tela da Dashboard com login fake
 - [x] Incluir no README instruções de instalação do projeto e quaisquer observações relevantes
 - [x] Design responsivo e interativo
-
-### Funcionalidades pendentes
-
-- [ ] Persistência da sessão e filtros via URL state (sem banco de dados)
-- [ ] Capacidade de filtrar transações por datas, contas, indústrias e estado
+- [x] Persistência da sessão e filtros via URL state (sem banco de dados)
+- [x] Capacidade de filtrar transações por datas, contas, indústrias e estado
 
 ### Recomendado (opcional)
 - [x] Considere fazer o deploy na Vercel ou outra plataforma, fornecendo um link de acesso
