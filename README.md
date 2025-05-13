@@ -77,7 +77,6 @@ O projeto estará disponível em http://localhost:3000
 - [x] Considere fazer o deploy na Vercel ou outra plataforma, fornecendo um link de acesso
 - [x] Utilização de bibliotecas de componentes (MUI, Chakra, etc.) e de construção de gráficos (Highcharts, Chart.js, etc.)
 - [x] Utilização de Cache do Next.js
-- [ ] Testes unitários
 
 ## Autor
 - [@rafaelppereira](https://www.github.com/rafaelppereira)

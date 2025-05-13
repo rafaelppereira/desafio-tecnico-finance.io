@@ -6,7 +6,11 @@ import {
   TrendingDownIcon,
   TrendingUpIcon,
 } from "lucide-react";
-import { FinancialSummaryCardContainer, FinancialSummaryLoader, Variant } from "./styles";
+import {
+  FinancialSummaryCardContainer,
+  FinancialSummaryLoader,
+  Variant,
+} from "./styles";
 import CountUp from "react-countup";
 import { useTransaction } from "@/hooks/useTransaction";
 
@@ -38,17 +42,23 @@ export function MetricsFinancialSummaryCard({
   return (
     <FinancialSummaryCardContainer $variant={variant} $col={col}>
       <div>
-        {isLoadingTransactionsInfo ? <FinancialSummaryLoader /> : <Icon />}
-        <CountUp
-          end={value}
-          duration={3}
-          formattingFn={(val) =>
-            new Intl.NumberFormat("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            }).format(val)
-          }
-        />
+        {isLoadingTransactionsInfo ? (
+          <FinancialSummaryLoader />
+        ) : (
+          <>
+            <Icon />
+            <CountUp
+              end={value}
+              duration={3}
+              formattingFn={(val) =>
+                new Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(val)
+              }
+            />
+          </>
+        )}
       </div>
 
       <h2>{title}</h2>
