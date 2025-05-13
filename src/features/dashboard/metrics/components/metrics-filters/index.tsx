@@ -1,3 +1,4 @@
+ 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Select } from "@/components/select";
 import {
@@ -23,18 +24,18 @@ export function MetricsFilters() {
   const pathname = usePathname();
   const {
     stateTypes,
-    transactions,
     accountTypes,
     industryTypes,
     setTransactions,
-    transactionsBackup
+    transactionsBackup,
+    getAllTransactionsInfo,
   } = useTransaction();
 
   const form = useForm<MetricsFiltersSchemaProps>({
     resolver: zodResolver(metricsFiltersSchema),
   });
 
-  const onSubmit = (data: MetricsFiltersSchemaProps) => {
+  const onSubmit = async (data: MetricsFiltersSchemaProps) => {
     const params = new URLSearchParams();
 
     if (data.account) params.set("account", data.account);
@@ -43,42 +44,37 @@ export function MetricsFilters() {
 
     router.push(`${pathname}?${params.toString()}`);
 
-    const filter = transactions.filter(
+    const filter = transactionsBackup.filter(
       (t: any) =>
         t.account === data.account ||
         t.industry === data.industry ||
         t.state === data.state
     );
     setTransactions(filter);
+    getAllTransactionsInfo(false)
   };
 
-  const handleResetFilters = () => {
+  const handleResetFilters = async () => {
     form.reset();
     router.push(pathname);
-    setTransactions(transactionsBackup)
+    await getAllTransactionsInfo()
   };
 
   useEffect(() => {
+    if (!industryTypes || !accountTypes || !stateTypes) return;
+
     const state = searchParams.get("state");
     const endDate = searchParams.get("endDate");
     const account = searchParams.get("account");
     const industry = searchParams.get("industry");
     const startDate = searchParams.get("startDate");
 
-    console.log({
-      state,
-      endDate,
-      account,
-      industry,
-      startDate,
-    });
-
     form.setValue("state", state ?? "");
     form.setValue("endDate", endDate ?? "");
     form.setValue("account", account ?? "");
     form.setValue("industry", industry ?? "");
     form.setValue("startDate", startDate ?? "");
-  }, [form, searchParams]);
+  }, [industryTypes, accountTypes, stateTypes, searchParams, form]);
 
   return (
     <FormProvider {...form}>
