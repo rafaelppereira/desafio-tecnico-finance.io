@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import StyledRootLayout from "@/@config/styles/styled-root-layout";
+import { TransactionProvider } from "@/contexts/TransactionContext";
 
 const geistSans = Plus_Jakarta_Sans({
   variable: "--font-geist-sans",
@@ -21,7 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable}`}>
-        <StyledRootLayout>{children}</StyledRootLayout>
+        <StyledRootLayout>
+          <TransactionProvider>
+            {children}
+          </TransactionProvider>
+        </StyledRootLayout>
       </body>
     </html>
   );

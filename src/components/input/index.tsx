@@ -4,9 +4,9 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { FormErrorMessage } from "../form-error-message";
 
 interface InputProps extends ComponentProps<"input"> {
-  name: string
+  name: string;
   label?: string;
-  className?: string
+  className?: string;
 }
 
 export function Input({ label, className, ...props }: InputProps) {
@@ -22,9 +22,7 @@ export function Input({ label, className, ...props }: InputProps) {
 
   return (
     <InputContainer>
-      {label && (
-        <InputLabel>{label}</InputLabel>
-      )}
+      {label && <InputLabel>{label}</InputLabel>}
 
       <div>
         <input
@@ -40,7 +38,7 @@ export function Input({ label, className, ...props }: InputProps) {
         )}
       </div>
 
-      <FormErrorMessage name={props.name} />
+      {props.name && <FormErrorMessage name={props.name} />}
     </InputContainer>
   );
 }

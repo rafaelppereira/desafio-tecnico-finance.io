@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { Loader2Icon } from "lucide-react";
+import styled, { keyframes } from "styled-components";
 
 export const MetricsLineChartContainer = styled.div`
   width: 100%;
@@ -12,14 +13,34 @@ export const MetricsLineChartContainer = styled.div`
 export const MetricsLineChartTitle = styled.div`
   margin-bottom: 1.2rem;
 
-  > h2 {
-    font-weight: 600;
-    font-size: 1.2rem;
+  > div {
+    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    
+    > h2 {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
   }
+
 
   > p {
     font-size: 1rem;
     margin-top: 0.2rem;
     color: hsl(var(--muted-foreground));
   }
+`;
+
+const spin = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const MetricsLineLoader = styled(Loader2Icon)`
+  animation: ${spin} 1s linear infinite;
 `;

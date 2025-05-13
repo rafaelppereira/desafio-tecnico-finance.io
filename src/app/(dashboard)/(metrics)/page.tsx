@@ -1,6 +1,7 @@
 "use client";
 
 import { PageTitle } from "@/components/page-title";
+import { MetricsFilters } from "@/features/dashboard/metrics/components/metrics-filters";
 import { MetricsFinancialSummaryCard } from "@/features/dashboard/metrics/components/metrics-financial-summary-card";
 import { MetricsLineChart } from "@/features/dashboard/metrics/components/metrics-line-chart";
 import { MetricsStackedBarChart } from "@/features/dashboard/metrics/components/metrics-stacked-bar-chart";
@@ -9,8 +10,6 @@ import {
   MetricsPageSummaryCardContainer,
 } from "@/features/dashboard/metrics/styles";
 import { useTransaction } from "@/hooks/useTransaction";
-
-import { motion } from "framer-motion";
 
 export default function Home() {
   const { summary } = useTransaction();
@@ -23,79 +22,42 @@ export default function Home() {
         description="Exibe em tempo real as métricas da sua empresa da parte financeira e de gestão."
       />
 
+      <MetricsFilters />
+
       <>
         <MetricsPageSummaryCardContainer>
-          <motion.div
-            animate={{ y: 0, opacity: 1 }}
-            initial={{ y: 50, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <MetricsFinancialSummaryCard
-              value={summary.income}
-              title="Receitas totais"
-              iconName="TrendingUpIcon"
-            />
-          </motion.div>
+          <MetricsFinancialSummaryCard
+            value={summary.income}
+            title="Receitas totais"
+            iconName="TrendingUpIcon"
+          />
 
-          <motion.div
-            animate={{ y: 0, opacity: 1 }}
-            initial={{ y: 50, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <MetricsFinancialSummaryCard
-              variant="negative"
-              title="Despesas totais"
-              value={summary.expenses}
-              iconName="TrendingDownIcon"
-            />
-          </motion.div>
+          <MetricsFinancialSummaryCard
+            variant="negative"
+            title="Despesas totais"
+            value={summary.expenses}
+            iconName="TrendingDownIcon"
+          />
 
-          <motion.div
-            animate={{ y: 0, opacity: 1 }}
-            initial={{ y: 50, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-          >
-            <MetricsFinancialSummaryCard
-              variant="pending"
-              value={summary.pending}
-              iconName="RefreshCcwIcon"
-              title="Transações pendentes"
-            />
-          </motion.div>
+          <MetricsFinancialSummaryCard
+            variant="pending"
+            value={summary.pending}
+            iconName="RefreshCcwIcon"
+            title="Transações pendentes"
+          />
 
-          <motion.div
-            animate={{ y: 0, opacity: 1 }}
-            initial={{ y: 50, opacity: 0 }}
-            style={{ gridColumn: "span 3 / span 3" }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-          >
-            <MetricsFinancialSummaryCard
-              col={3}
-              title="Saldo total"
-              iconName="DollarSign"
-              value={summary.balance}
-            />
-          </motion.div>
+          <MetricsFinancialSummaryCard
+            col={3}
+            title="Saldo total"
+            iconName="DollarSign"
+            value={summary.balance}
+          />
         </MetricsPageSummaryCardContainer>
 
         <MetricsPageChartsContainer>
-          <motion.div
-            animate={{ y: 0, opacity: 1 }}
-            initial={{ y: 50, opacity: 0 }}
-            style={{ gridColumn: "span 3 / span 3" }}
-            transition={{ duration: 0.5, delay: 1 }}
-          >
-            <MetricsLineChart />
-          </motion.div>
+          <MetricsLineChart />
 
-          <motion.div
-            animate={{ y: 0, opacity: 1 }}
-            initial={{ y: 50, opacity: 0 }}
-            style={{ gridColumn: "span 3 / span 3" }}
-            transition={{ duration: 0.5, delay: 1.3 }}
-          >
-            <MetricsStackedBarChart />
-          </motion.div>
+          <MetricsStackedBarChart />
         </MetricsPageChartsContainer>
       </>
     </div>

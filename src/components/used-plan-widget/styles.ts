@@ -22,6 +22,7 @@ export const UsedPlanWidgetTitleContainer = styled.div`
 
   > p {
     margin-top: 0.25rem;
+    white-space: nowrap;
     color: hsl(var(--muted-foreground) / 0.8);
   }
 `

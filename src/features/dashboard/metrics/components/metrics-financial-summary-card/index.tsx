@@ -1,14 +1,20 @@
 "use client";
 
-import { DollarSign, RefreshCcwIcon, TrendingDownIcon, TrendingUpIcon } from "lucide-react";
-import { FinancialSummaryCardContainer, Variant } from "./styles";
+import {
+  DollarSign,
+  RefreshCcwIcon,
+  TrendingDownIcon,
+  TrendingUpIcon,
+} from "lucide-react";
+import { FinancialSummaryCardContainer, FinancialSummaryLoader, Variant } from "./styles";
 import CountUp from "react-countup";
+import { useTransaction } from "@/hooks/useTransaction";
 
 interface FinancialSummaryCardProps {
   col?: number;
   title: string;
   value: number;
-  variant?: Variant
+  variant?: Variant;
   iconName: keyof typeof icons;
 }
 
@@ -17,21 +23,22 @@ const icons = {
   TrendingUpIcon,
   RefreshCcwIcon,
   TrendingDownIcon,
-}
+};
 
 export function MetricsFinancialSummaryCard({
   title,
   value,
   col = 1,
   iconName,
-  variant = 'default',
+  variant = "default",
 }: FinancialSummaryCardProps) {
-  const Icon = icons[iconName]
+  const Icon = icons[iconName];
+  const { isLoadingTransactionsInfo } = useTransaction();
 
   return (
     <FinancialSummaryCardContainer $variant={variant} $col={col}>
       <div>
-        <Icon />
+        {isLoadingTransactionsInfo ? <FinancialSummaryLoader /> : <Icon />}
         <CountUp
           end={value}
           duration={3}

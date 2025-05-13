@@ -66,10 +66,10 @@ O projeto estará disponível em http://localhost:3000
 - [x] Filtros globais e dinâmicos com atualização de conteúdo conforme os filtros aplicados
 - [x] Proteger a tela da Dashboard com login fake
 - [x] Incluir no README instruções de instalação do projeto e quaisquer observações relevantes
+- [x] Design responsivo e interativo
 
 ### Funcionalidades pendentes
 
-- [ ] Design responsivo e interativo
 - [ ] Persistência da sessão e filtros via URL state (sem banco de dados)
 - [ ] Capacidade de filtrar transações por datas, contas, indústrias e estado
 

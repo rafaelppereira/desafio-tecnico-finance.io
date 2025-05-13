@@ -12,17 +12,21 @@ import {
 import {
   MetricsStackedBarChartContainer,
   MetricsStackedBarChartTitle,
+  MetricsStackedBarLoader,
 } from "./styles";
 import { useTransaction } from "@/hooks/useTransaction";
 import { MetricsTooltipChart } from "../metrics-tooltip-chart";
 
 export function MetricsStackedBarChart() {
-  const { monthlyData } = useTransaction();
+  const { monthlyData, isLoadingTransactionsInfo } = useTransaction();
 
   return (
     <MetricsStackedBarChartContainer>
       <MetricsStackedBarChartTitle>
-        <h2>Total de receitas e despesas por mês</h2>
+        <div>
+          {isLoadingTransactionsInfo && <MetricsStackedBarLoader />}
+          <h2>Total de receitas e despesas por mês</h2>
+        </div>
         <p>Visualize o total de receitas e despesas por mês.</p>
       </MetricsStackedBarChartTitle>
 

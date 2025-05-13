@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const MetricsPageSummaryCardContainer = styled.div`
   display: grid;
-  margin-top: 2rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 1rem;

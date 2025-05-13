@@ -11,18 +11,21 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import { MetricsLineChartContainer, MetricsLineChartTitle } from "./styles";
+import { MetricsLineChartContainer, MetricsLineChartTitle, MetricsLineLoader } from "./styles";
 import { useTransaction } from "@/hooks/useTransaction";
 import { MetricsTooltipChart } from "../metrics-tooltip-chart";
 
 
 export function MetricsLineChart() {
-  const { monthlyData } = useTransaction();
+  const { monthlyData, isLoadingTransactionsInfo } = useTransaction();
 
   return (
     <MetricsLineChartContainer>
       <MetricsLineChartTitle>
-        <h2>Saldo acumulado ao longo do tempo</h2>
+        <div>
+          {isLoadingTransactionsInfo && <MetricsLineLoader />}
+          <h2>Saldo acumulado ao longo do tempo</h2>
+        </div>
         <p>Visualize por mês o saldo acumulado ao longo do tempo.</p>
       </MetricsLineChartTitle>
 

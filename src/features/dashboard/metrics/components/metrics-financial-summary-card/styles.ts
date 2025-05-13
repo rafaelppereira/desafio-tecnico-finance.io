@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components";
+import { Loader2Icon } from "lucide-react";
+import styled, { css, keyframes } from "styled-components";
 
 export type Variant = "default" | "negative" | "pending";
 
@@ -74,4 +75,17 @@ export const FinancialSummaryCardContainer = styled.div<FinancialSummaryCardCont
   @media (max-width: 1200px) {
     grid-column: span 1 / span 1
   }
+`;
+
+const spin = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const FinancialSummaryLoader = styled(Loader2Icon)`
+  animation: ${spin} 1s linear infinite;
 `;

@@ -30,7 +30,7 @@ import { useState } from "react";
 
 export function Sidebar() {
   const router = useRouter();
-  const [hasToggleSidebar, setHasToggleSidebar] = useState(true);
+  const [hasToggleSidebar, setHasToggleSidebar] = useState(false);
 
   const handleToggleSidebar = () => {
     setHasToggleSidebar(!hasToggleSidebar);
