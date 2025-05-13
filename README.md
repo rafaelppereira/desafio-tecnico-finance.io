@@ -34,7 +34,7 @@ O Finance.IO é uma dashboard financeira que resume e visualiza transações da 
 1. Clone o repositório:
 
 ```bash
-  git clone https://github.com/rafaelppereira/finance.io.git
+  git clone https://github.com/rafaelppereira/desafio-tecnico-finance.io.git
   cd finance.io
 ```
 
