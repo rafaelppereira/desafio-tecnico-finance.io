@@ -67,8 +67,8 @@ export function MetricsFilters() {
   };
 
   const handleResetFilters = async () => {
-    form.reset();
-    router.push(pathname);
+    form.reset();               
+    router.push(pathname);      
     await getAllTransactionsInfo();
   };
 

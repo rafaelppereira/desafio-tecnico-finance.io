@@ -50,6 +50,7 @@ export default function Home() {
             col={3}
             title="Saldo total"
             iconName="DollarSign"
+            variant={summary.balance < 0 ? 'negative' : 'default'}
             value={summary.balance}
           />
         </MetricsPageSummaryCardContainer>

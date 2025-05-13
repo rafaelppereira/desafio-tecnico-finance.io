@@ -9,6 +9,12 @@ export const MetricsStackedBarChartContainer = styled.div`
 
   grid-column: span 1 / span 1;
 
+  transition: all 0.2s;
+
+  &:hover {
+    scale: 0.98;
+  }
+
   span {
     font-weight: 700;
     border-radius: 9999px;

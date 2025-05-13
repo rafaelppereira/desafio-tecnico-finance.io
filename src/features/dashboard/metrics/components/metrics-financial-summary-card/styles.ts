@@ -17,6 +17,12 @@ export const FinancialSummaryCardContainer = styled.div<FinancialSummaryCardCont
 
   grid-column: span ${({ $col }) => $col} / span ${({ $col }) => $col};
 
+  transition: all 0.2s;
+
+  &:hover {
+    scale: 0.98;
+  }
+
   > div {
     display: flex;
     align-items: center;

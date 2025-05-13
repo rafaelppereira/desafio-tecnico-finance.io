@@ -9,6 +9,12 @@ export const MetricsLineChartContainer = styled.div`
 
   grid-column: span 1 / span 1;
 
+  transition: all 0.2s;
+
+  &:hover {
+    scale: 0.98;
+  }
+
   span {
     font-weight: 700;
     border-radius: 9999px;
@@ -28,13 +34,12 @@ export const MetricsLineChartTitle = styled.div`
     gap: 0.5rem;
     display: flex;
     align-items: center;
-    
+
     > h2 {
       font-weight: 600;
       font-size: 1.2rem;
     }
   }
-
 
   > p {
     font-size: 1rem;
